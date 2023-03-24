@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import * as process from "process";
 
 @Injectable()
-export class WebConfig {
+export class GeoTrackingConfig {
     private readonly _accessToken: string;
 
     constructor() {

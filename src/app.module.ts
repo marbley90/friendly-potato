@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { WebModule } from "./web/web.module";
+import { GeoTrackingModule } from "./geo-tracking/geo-tracking.module";
 
 @Module({
   imports: [
-      WebModule
+      GeoTrackingModule
   ]
 })
 export class AppModule {}

@@ -1,12 +1,11 @@
-import { HttpException, HttpStatus, Injectable, LoggerService } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { request } from "express";
-import { WebConfig } from "../web.config";
+import { GeoTrackingConfig } from "../geo-tracking.config";
 
 @Injectable()
 export class AuthGuardService {
 
-    constructor(private readonly loggerService: LoggerService,
-                private readonly config: WebConfig) {
+    constructor(private readonly config: GeoTrackingConfig) {
     }
 
     public isAuthorized(req: any): boolean {
@@ -21,7 +20,7 @@ export class AuthGuardService {
             else
                 throw new HttpException('Not found', HttpStatus.UNAUTHORIZED);
         } catch (error) {
-            this.loggerService.error(`Authentication failed with: ${error}`);
+            console.error(`Authentication failed with: ${error}`);
             throw new HttpException('Not found', HttpStatus.UNAUTHORIZED);
         }
     }
