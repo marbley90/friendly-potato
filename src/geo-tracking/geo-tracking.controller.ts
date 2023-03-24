@@ -1,6 +1,6 @@
 import {
     Body,
-    Controller,
+    Controller, Delete,
     Get, HttpCode,
     HttpException,
     HttpStatus, Post,
@@ -47,7 +47,7 @@ export class GeoTrackingController {
         }
     }
 
-    @Post('/deletion')
+    @Delete('/deletion')
     @HttpCode(HttpStatus.OK)
     @UsePipes(new ValidationPipe({ transform: true }))
     @UseGuards(AuthGuard)

@@ -9,10 +9,12 @@ export class GeoTrackingService {
     }
 
     async getDriverLocations(driverName: string, day: Days): Promise<GetLocationResponse[]>{
+        // TODO add redis logic, store for 5 mins
         return [];
     }
 
     async getDrivers(timePeriod: string): Promise<string[]>{
+        // TODO add redis logic, store for 5 mins
         return [];
     }
 
@@ -25,6 +27,7 @@ export class GeoTrackingService {
     }
 
     async getDriversWithSharedLocations(radius: number, coordinates: number[],timePeriod: string): Promise<string[]>{
+        // TODO add redis logic, store for 5 mins
         return [];
     }
 }
