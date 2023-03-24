@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { RequestLoggerMiddleware } from "./middleware/request-logger-middleware";
 import { AuthGuardService } from "./guards/auth.guard.service";
 import { GeoTrackingController } from "./geo-tracking.controller";
-import {GeoTrackingService} from "./geo-tracking.service";
+import { GeoTrackingService } from "./geo-tracking.service";
 
 @Module({
     imports: [],
