@@ -1,7 +1,15 @@
-import {IsNotEmpty, IsString} from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class DriversDto {
     @IsNotEmpty()
     @IsString()
-    timePeriod: string;
+    location: string;
+
+    @IsNotEmpty()
+    @IsString()
+    dateStart: string;
+
+    @IsNotEmpty()
+    @IsString()
+    dateEnd: string;
 }

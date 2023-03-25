@@ -7,5 +7,9 @@ export class DeleteDataDto {
 
     @IsOptional()
     @IsString()
-    timePeriod: string;
+    dateStart: string;
+
+    @IsOptional()
+    @IsString()
+    dateEnd: string;
 }

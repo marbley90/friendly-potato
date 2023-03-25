@@ -1,5 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { Days } from "../domain/geo-tracking.types";
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class LocationDto {
     @IsNotEmpty()
@@ -7,6 +6,10 @@ export class LocationDto {
     readonly driverName: string;
 
     @IsNotEmpty()
-    @IsEnum(Days)
-    readonly day: Days;
+    @IsString()
+    readonly dateTimeStart: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly dateTimeEnd: string;
 }

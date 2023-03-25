@@ -25,24 +25,12 @@ export class GeoTrackingController {
     constructor(private readonly geoTrackingService: GeoTrackingService) {
     }
 
-    @Get('/location/all')
-    @UsePipes(new ValidationPipe({ transform: true }))
-    @UseGuards(AuthGuard)
-    async locations(@Body() locationDto: any, @Req() request: any): Promise<any> {
-        try {
-            return await this.geoTrackingService.getAllLocations();
-        } catch (error) {
-            console.error(`Failed to retrieve location for driver ${locationDto.driverName}`);
-            throw new HttpException('Server error', HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @Get('/location')
     @UsePipes(new ValidationPipe({ transform: true }))
     @UseGuards(AuthGuard)
     async getLocation(@Body() locationDto: LocationDto, @Req() request: any): Promise<GetLocationResponse[]> {
         try {
-            return await this.geoTrackingService.getDriverLocations(locationDto.driverName, locationDto.day);
+            return await this.geoTrackingService.getDriverLocations(locationDto.driverName, locationDto.dateTimeStart, locationDto.dateTimeEnd);
         } catch (error) {
             console.error(`Failed to retrieve location for driver ${locationDto.driverName}`);
             throw new HttpException('Server error', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -54,7 +42,7 @@ export class GeoTrackingController {
     @UseGuards(AuthGuard)
     async getDrivers(@Body() driversDto: DriversDto, @Req() request: any): Promise<string[]> {
         try {
-            return await this.geoTrackingService.getDrivers(driversDto.timePeriod);
+            return await this.geoTrackingService.getDrivers(driversDto.location, driversDto.dateStart, driversDto.dateEnd);
         } catch (error) {
             console.error(`Failed to retrieve drivers`);
             throw new HttpException('Server error', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,7 +55,7 @@ export class GeoTrackingController {
     @UseGuards(AuthGuard)
     async deleteData(@Body() dataDto: DeleteDataDto, @Req() request: any): Promise<void> {
         try {
-            return await this.geoTrackingService.deleteDriverLocationData(dataDto.driverName, dataDto.timePeriod);
+            return await this.geoTrackingService.deleteDriverLocationData(dataDto.driverName, dataDto.dateStart, dataDto.dateEnd);
         } catch (error) {
             console.error(`Failed to delete driver's ${dataDto.driverName} location data`);
             throw new HttpException('Server error', HttpStatus.INTERNAL_SERVER_ERROR);
