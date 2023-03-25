@@ -1,5 +1,5 @@
-import {IsEnum, IsNotEmpty, IsString} from 'class-validator';
-import {Days} from "../domain/geo-tracking.types";
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { Days } from "../domain/geo-tracking.types";
 
 export class LocationDto {
     @IsNotEmpty()

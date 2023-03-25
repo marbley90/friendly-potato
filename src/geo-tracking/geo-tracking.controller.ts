@@ -1,9 +1,11 @@
 import {
     Body,
-    Controller, Delete,
-    Get, HttpCode,
+    Controller,
+    Delete,
+    Get,
+    HttpCode,
     HttpException,
-    HttpStatus, Post,
+    HttpStatus,
     Req,
     UseGuards,
     UsePipes,
@@ -15,12 +17,24 @@ import { LocationDto } from "./dto/location.dto";
 import { GeoTrackingService } from "./geo-tracking.service";
 import { DriversDto } from "./dto/drivers.dto";
 import { DeleteDataDto } from "./dto/delete-data.dto";
-import {SearchSharedLocationDto} from "./dto/search-shared-location.dto";
+import { SearchSharedLocationDto } from "./dto/search-shared-location.dto";
 
 @Controller('track')
 export class GeoTrackingController {
 
     constructor(private readonly geoTrackingService: GeoTrackingService) {
+    }
+
+    @Get('/location/all')
+    @UsePipes(new ValidationPipe({ transform: true }))
+    @UseGuards(AuthGuard)
+    async locations(@Body() locationDto: any, @Req() request: any): Promise<any> {
+        try {
+            return await this.geoTrackingService.getAllLocations();
+        } catch (error) {
+            console.error(`Failed to retrieve location for driver ${locationDto.driverName}`);
+            throw new HttpException('Server error', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Get('/location')

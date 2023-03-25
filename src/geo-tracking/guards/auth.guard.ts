@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
     constructor(private readonly authGuardService: AuthGuardService) {
     }
 
-    async canActivate( context: ExecutionContext ): Promise<boolean>  {
+    async canActivate(context: ExecutionContext): Promise<boolean>  {
         const request = context.switchToHttp().getRequest();
 
         return this.authGuardService.isAuthorized(request);

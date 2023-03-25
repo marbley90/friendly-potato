@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { request } from "express";
 import { GeoTrackingConfig } from "../geo-tracking.config";
 
 @Injectable()
@@ -10,10 +9,10 @@ export class AuthGuardService {
 
     public isAuthorized(req: any): boolean {
         try {
-            if ( !req )
+            if (!req)
                 throw new HttpException('Authorization header is undefined', HttpStatus.UNAUTHORIZED);
 
-            const valid = request.headers['authorization'] == `Bearer ${this.config.accessToken}`;
+            const valid = req.headers['authorization'] == `Bearer ${this.config.accessToken}`;
 
             if (valid)
                 return true;

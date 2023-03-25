@@ -14,7 +14,8 @@ async function bootstrap() {
 
   app.use(requestIp.mw());
 
-  await app.listen(process.env.PORT);
+  // await app.listen(process.env.PORT);
+  await app.listen(3000);
 
   console.log(`Friendly Potato API application started at port ${process.env.PORT}!`);
 }

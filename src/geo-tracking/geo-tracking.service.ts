@@ -1,14 +1,22 @@
 import { Injectable } from "@nestjs/common";
-import {Days} from "./domain/geo-tracking.types";
-import {GetLocationResponse} from "./domain/geo-tracking.interfaces";
+import { Days } from "./domain/geo-tracking.types";
+import { GetLocationResponse } from "./domain/geo-tracking.interfaces";
+import { DbOperationsService } from "./database/db-operations.service";
 
 @Injectable()
 export class GeoTrackingService {
 
-    constructor() {
+    constructor(private readonly dbOperationsService: DbOperationsService) {
     }
 
-    async getDriverLocations(driverName: string, day: Days): Promise<GetLocationResponse[]>{
+    //TODO for test
+    async getAllLocations(): Promise<any>{
+        const locations = await this.dbOperationsService.getAllLocations();
+
+        return locations;
+    }
+
+    async getDriverLocations(driverName?: string, day?: Days): Promise<GetLocationResponse[]>{
         // TODO add redis logic, store for 5 mins
         return [];
     }

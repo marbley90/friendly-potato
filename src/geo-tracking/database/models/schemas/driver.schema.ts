@@ -1,21 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
+import { Location } from "./location.schema";
 
 export type DriverDocument = HydratedDocument<Driver>;
 
 @Schema()
 export class Driver {
     @Prop()
-    driver: string;
+    name: string;
 
-    @Prop()
-    location: string;
-
-    @Prop([Number])
-    coordinates: number[];
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Location' })
+    location: Location;
 
     @Prop()
     timestamp: number;
 }
 
-export const CatSchema = SchemaFactory.createForClass(Driver);
+export const DriverSchema = SchemaFactory.createForClass(Driver);
