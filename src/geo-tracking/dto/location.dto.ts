@@ -1,15 +1,23 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsString } from 'class-validator';
+import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 
 export class LocationDto {
     @IsNotEmpty()
     @IsString()
+    @ApiProperty()
     readonly driverName: string;
 
     @IsNotEmpty()
-    @IsString()
-    readonly dateTimeStart: string;
+    @IsDateString()
+    @ApiPropertyOptional({
+        example: '2022-02-02 14:45:56'
+    })
+    readonly dateTimeStart: Date;
 
     @IsNotEmpty()
-    @IsString()
-    readonly dateTimeEnd: string;
+    @IsDateString()
+    @ApiPropertyOptional({
+        example: '2022-02-02 14:45:56'
+    })
+    readonly dateTimeEnd: Date;
 }

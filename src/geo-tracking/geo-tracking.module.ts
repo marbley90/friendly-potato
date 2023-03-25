@@ -1,8 +1,7 @@
 import { redisStore } from 'cache-manager-redis-yet';
 import * as process from "process";
-import { CacheModule, MiddlewareConsumer, Module } from "@nestjs/common";
+import { CacheModule, Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { RequestLoggerMiddleware } from "./middleware/request-logger-middleware";
 import { AuthGuardService } from "./guards/auth.guard.service";
 import { GeoTrackingController } from "./geo-tracking.controller";
 import { GeoTrackingService } from "./geo-tracking.service";
@@ -19,8 +18,7 @@ import { GeoTrackingUtils } from "./utils/geo-tracking-utils";
                     socket: {
                         host: process.env.REDIS_HOST,
                         port: +process.env.REDIS_PORT
-                    },
-                    ttl: 60
+                    }
                 })
             })
         }),
@@ -37,8 +35,4 @@ import { GeoTrackingUtils } from "./utils/geo-tracking-utils";
         GeoTrackingUtils
     ]
 })
-export class GeoTrackingModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(RequestLoggerMiddleware).forRoutes('/');
-    }
-}
+export class GeoTrackingModule { }

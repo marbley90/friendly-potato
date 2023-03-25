@@ -1,15 +1,23 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsString } from "class-validator";
+import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 
 export class DriversDto {
     @IsNotEmpty()
     @IsString()
+    @ApiProperty()
     location: string;
 
     @IsNotEmpty()
-    @IsString()
-    dateStart: string;
+    @IsDateString()
+    @ApiPropertyOptional({
+        example: '2022-02-02 14:45:56'
+    })
+    dateStart: Date;
 
     @IsNotEmpty()
-    @IsString()
-    dateEnd: string;
+    @IsDateString()
+    @ApiPropertyOptional({
+        example: '2022-02-02 14:45:56'
+    })
+    dateEnd: Date;
 }

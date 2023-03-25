@@ -1,0 +1,21 @@
+version: '3'
+services:
+  myapp:
+    container_name: friendly-potato
+    restart: always
+    build: .
+    ports:
+      - '3000:3000'
+    links:
+      - redis
+      - mongo
+  mongo:
+    container_name: YOUR_MONGO
+    image: 'mongo:latest'
+    ports:
+      - '27017:27017'
+  redis:
+    container_name: YOUR_REDIS
+    image: 'redis:latest'
+    ports:
+      - '6379:6379'

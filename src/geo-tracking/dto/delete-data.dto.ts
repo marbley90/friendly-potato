@@ -1,15 +1,23 @@
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class DeleteDataDto {
     @IsNotEmpty()
     @IsString()
+    @ApiProperty()
     readonly driverName: string;
 
     @IsOptional()
-    @IsString()
-    dateStart: string;
+    @IsDateString()
+    @ApiPropertyOptional({
+        example: '2022-02-02 14:45:56'
+    })
+    dateStart: Date;
 
     @IsOptional()
-    @IsString()
-    dateEnd: string;
+    @IsDateString()
+    @ApiPropertyOptional({
+        example: '2022-02-02 14:45:56'
+    })
+    dateEnd: Date;
 }

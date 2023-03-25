@@ -2,13 +2,13 @@ import {HydratedDocument} from "mongoose";
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 
 export type GeoDocument = HydratedDocument<Geo>;
-@Schema()
+@Schema({ collection: 'geo' })
 export class Geo {
     @Prop()
     driver: string;
 
     @Prop()
-    location: number;
+    location: string;
 
     @Prop([Number])
     coordinates: number[];
